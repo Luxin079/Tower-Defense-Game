@@ -62,31 +62,29 @@ Leg uit hoe het spel moeilijker wordt naarmate de waves doorgaan. Denk aan sterk
 hoe meer waves je overleeft heeft invloed op hp van de enemys en hoe veel verschillende enemys er spawnen je zal ook je geld na elke wave slimmer moeten gebruiken omdat de enemys moeilijker en meer overwachts worden. dus je moet goed nadenken over welke towers en buffs welke enemys counteren.
 
 ## 8. Risico’s en oplossingen volgens PIO
-- Probleem 1: 
-- Impact:
-- Oplossing:
+- Probleem 1: backround en ui laten werken
+- Impact: het visuele deel van de game
+- Oplossing: goed de camara gebruiken en simpele code gebruiken
 
-- Probleem 2:
-- Impact:
-- Oplossing:
+- Probleem 2: towers met elkaar samen laten werken
+- Impact: core game mechanic
+- Oplossing: variebles goed gebruiken
 
 
-- Probleem 3:
-- Impact:
-- Oplossing:
+- Probleem 3: geld systeem
+- Impact: gameplay
+- Oplossing: goede berekeningen maken
   
 ## 9. Planning per sprint en mechanics
 Schrijf per sprint welke mechanics jij oplevert in de build. Denk aan voorbeelden zoals vijandbeweging over een pad, torens plaatsen, doel kiezen en schieten, waves starten, UI voor geld en levens, upgrades, jouw unieke feature.
 
-Sprint 1 mechanics:
+Sprint 1 mechanics: art van enemys, towers en de map + simpele basis code om enemys en towers iets te laten doen
 
-Sprint 2 mechanics:
+Sprint 2 mechanics: art van ui + ui kunnen gebruiken in de game + een werkende test versie van de game
 
-Sprint 3 mechanics:
+Sprint 3 mechanics: uitgebreide fucnties van enemys en towers + gameplay zo leuk mogelijk maken + game afmaken
 
-Sprint 4 mechanics:
 
-Sprint 5 mechanics:
 
 
 ## 10. Inspiratie
@@ -111,15 +109,15 @@ Alle tien vijanden bereiken achtereenvolgens elk waypoint binnen één seconde n
 
 ### 11.1 Vijandbeweging over het pad
 - Keuze: enemys volgen recht het pad met mogelijk uitzonderingen.
-- Risico: 
-- Oplossing:
-- Acceptatie:
+- Risico: het goed laten spawmen van emeys
+- Oplossing: code goed van verschillende scripts goed met elkaar latne samenwerken
+- Acceptatie: enemys die goed kunnen spawnen en zonder problemen door de map gaan
 
 
 ### 11.2 Doel kiezen en schieten
 - Keuze: towers die je kan plaatsen die schieten op enemys
-- Risico:
-- Oplossing:
+- Risico: probleem als er meerdere towers actief zijn
+- Oplossing: 
 - Acceptatie:
 
 ### 11.3 Waves en spawnen
