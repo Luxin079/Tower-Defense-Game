@@ -22,7 +22,8 @@ Wat mijn tower defense game anders maakt dan andere is de old school art style e
 ## 3. Schets van je level en UI
 Maak een schets op papier of digitaal en voeg deze afbeelding toe aan je repository. Voeg in deze sectie de afbeelding in.
 
-(afbeelding)
+<img width="1152" height="648" alt="towerdefense" src="https://github.com/user-attachments/assets/f226c8a3-96ed-4110-bfe4-7ddddbdda17b" />
+
 
 Je schets bevat minimaal:
 1. Het pad waar de vijanden over lopen met beginpunt en eindpunt.
@@ -117,24 +118,24 @@ Alle tien vijanden bereiken achtereenvolgens elk waypoint binnen één seconde n
 ### 11.2 Doel kiezen en schieten
 - Keuze: towers die je kan plaatsen die schieten op enemys
 - Risico: probleem als er meerdere towers actief zijn
-- Oplossing: 
-- Acceptatie:
+- Oplossing: towers goed laten samenwerken in de inspector 
+- Acceptatie: towers die zonder problemen enemys kunnen schieten zonder dat ze elkaar storen of problemen veroorzaken
 
 ### 11.3 Waves en spawnen
 - Keuze: na elke waves spawnen er meer en sterkeren enemys
-- Risico: 
-- Oplossing:
-- Acceptatie:
+- Risico: scale probleem met health en hoeveelheid
+- Oplossing: goed van te voren werken en goeie berekeningen maken
+- Acceptatie: vloeiende duidelijk waves zonder problemen met de enemys
 
   
 ### 11.4 Economie en levens
 - Keuze: je krijgt geld als je tower enemys killen en aan het eind van elke wave. je verlies levens elke keer als een enemy het eiende bereikt
 - Risico: kans op problemen met het laten samenwerken van mechanics
 - Oplossing: simpele herbruikbare code gebruiken
-- Acceptatie:
+- Acceptatie: goeie gameplayloop 
 
 ### 11.5 UI basis
 - Keuze: simpele art en makkelijk te begrijpen
-- Risico: niks
-- Oplossing:
-- Acceptatie:
+- Risico: probleem met interacten
+- Oplossing: ui en interacten goed laten samenwerken
+- Acceptatie: een simpele ui die goed werkt zonder problemen of onduidelijkheid
