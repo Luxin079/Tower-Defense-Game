@@ -2,11 +2,15 @@
 
 public class EnemyMover : MonoBehaviour
 {
-    [Header("Sleep hier je checkpoints/waypoints in de juiste volgorde")]
+    [Header("Waypoints in de juiste volgorde")]
     public Transform[] waypoints;
 
     [Header("Snelheid van de enemy")]
     public float moveSpeed = 2f;
+
+    [Header("Enemy stats")]
+    public int maxHealth = 5;   // instelbaar in de Inspector
+    private int currentHealth;
 
     private int currentIndex = 0;
 
@@ -27,6 +31,9 @@ public class EnemyMover : MonoBehaviour
             SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
             sr.color = Color.red; // rode kleur als placeholder
         }
+
+        // Stel health in
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -55,5 +62,23 @@ public class EnemyMover : MonoBehaviour
                 Destroy(gameObject); // Of doe hier iets anders, bv. damage aan speler
             }
         }
+    }
+
+    // Deze functie kan door een tower worden aangeroepen
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log(gameObject.name + " kreeg " + damage + " damage. Health: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log(gameObject.name + " is vernietigd!");
+        Destroy(gameObject);
     }
 }
