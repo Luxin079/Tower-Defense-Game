@@ -22,7 +22,8 @@ Wat mijn tower defense game anders maakt dan andere is de old school art style e
 ## 3. Schets van je level en UI
 Maak een schets op papier of digitaal en voeg deze afbeelding toe aan je repository. Voeg in deze sectie de afbeelding in.
 
-(afbeelding)
+<img width="1152" height="648" alt="towerdefense" src="https://github.com/user-attachments/assets/f226c8a3-96ed-4110-bfe4-7ddddbdda17b" />
+
 
 Je schets bevat minimaal:
 1. Het pad waar de vijanden over lopen met beginpunt en eindpunt.
@@ -62,31 +63,29 @@ Leg uit hoe het spel moeilijker wordt naarmate de waves doorgaan. Denk aan sterk
 hoe meer waves je overleeft heeft invloed op hp van de enemys en hoe veel verschillende enemys er spawnen je zal ook je geld na elke wave slimmer moeten gebruiken omdat de enemys moeilijker en meer overwachts worden. dus je moet goed nadenken over welke towers en buffs welke enemys counteren.
 
 ## 8. Risico’s en oplossingen volgens PIO
-- Probleem 1: 
-- Impact:
-- Oplossing:
+- Probleem 1: backround en ui laten werken
+- Impact: het visuele deel van de game
+- Oplossing: goed de camara gebruiken en simpele code gebruiken
 
-- Probleem 2:
-- Impact:
-- Oplossing:
+- Probleem 2: towers met elkaar samen laten werken
+- Impact: core game mechanic
+- Oplossing: variebles goed gebruiken
 
 
-- Probleem 3:
-- Impact:
-- Oplossing:
+- Probleem 3: geld systeem
+- Impact: gameplay
+- Oplossing: goede berekeningen maken
   
 ## 9. Planning per sprint en mechanics
 Schrijf per sprint welke mechanics jij oplevert in de build. Denk aan voorbeelden zoals vijandbeweging over een pad, torens plaatsen, doel kiezen en schieten, waves starten, UI voor geld en levens, upgrades, jouw unieke feature.
 
-Sprint 1 mechanics:
+Sprint 1 mechanics: art van enemys, towers en de map + simpele basis code om enemys en towers iets te laten doen
 
-Sprint 2 mechanics:
+Sprint 2 mechanics: art van ui + ui kunnen gebruiken in de game + een werkende test versie van de game
 
-Sprint 3 mechanics:
+Sprint 3 mechanics: uitgebreide fucnties van enemys en towers + gameplay zo leuk mogelijk maken + game afmaken
 
-Sprint 4 mechanics:
 
-Sprint 5 mechanics:
 
 
 ## 10. Inspiratie
@@ -111,32 +110,32 @@ Alle tien vijanden bereiken achtereenvolgens elk waypoint binnen één seconde n
 
 ### 11.1 Vijandbeweging over het pad
 - Keuze: enemys volgen recht het pad met mogelijk uitzonderingen.
-- Risico: 
-- Oplossing:
-- Acceptatie:
+- Risico: het goed laten spawmen van emeys
+- Oplossing: code goed van verschillende scripts goed met elkaar latne samenwerken
+- Acceptatie: enemys die goed kunnen spawnen en zonder problemen door de map gaan
 
 
 ### 11.2 Doel kiezen en schieten
 - Keuze: towers die je kan plaatsen die schieten op enemys
-- Risico:
-- Oplossing:
-- Acceptatie:
+- Risico: probleem als er meerdere towers actief zijn
+- Oplossing: towers goed laten samenwerken in de inspector 
+- Acceptatie: towers die zonder problemen enemys kunnen schieten zonder dat ze elkaar storen of problemen veroorzaken
 
 ### 11.3 Waves en spawnen
 - Keuze: na elke waves spawnen er meer en sterkeren enemys
-- Risico: 
-- Oplossing:
-- Acceptatie:
+- Risico: scale probleem met health en hoeveelheid
+- Oplossing: goed van te voren werken en goeie berekeningen maken
+- Acceptatie: vloeiende duidelijk waves zonder problemen met de enemys
 
   
 ### 11.4 Economie en levens
 - Keuze: je krijgt geld als je tower enemys killen en aan het eind van elke wave. je verlies levens elke keer als een enemy het eiende bereikt
 - Risico: kans op problemen met het laten samenwerken van mechanics
 - Oplossing: simpele herbruikbare code gebruiken
-- Acceptatie:
+- Acceptatie: goeie gameplayloop 
 
 ### 11.5 UI basis
 - Keuze: simpele art en makkelijk te begrijpen
-- Risico: niks
-- Oplossing:
-- Acceptatie:
+- Risico: probleem met interacten
+- Oplossing: ui en interacten goed laten samenwerken
+- Acceptatie: een simpele ui die goed werkt zonder problemen of onduidelijkheid
