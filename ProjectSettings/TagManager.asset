@@ -6,6 +6,7 @@ TagManager:
   tags:
   - enemy
   - tower
+  - WayPointHolder
   layers:
   - Default
   - TransparentFX

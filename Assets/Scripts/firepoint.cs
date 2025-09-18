@@ -11,8 +11,8 @@ public class FirePointAim : MonoBehaviour
         {
             Vector2 dir = tower.CurrentTarget.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            transform.rotation = Quaternion.Euler(0, 0, angle + 90f);
         }
-
     }
-}
+   }
+

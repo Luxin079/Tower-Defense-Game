@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
     [Header("Waypoints in de juiste volgorde")]
-    public Transform[] waypoints;
+    public List<Transform> waypoints = new List<Transform>();
 
     [Header("Snelheid van de enemy")]
     public float moveSpeed = 2f;
@@ -14,9 +15,15 @@ public class EnemyMover : MonoBehaviour
 
     private int currentIndex = 0;
 
+    private WaypointHolder waypointHolder;  
+
     void Start()
     {
-        if (waypoints.Length == 0)
+
+        waypointHolder = GameObject.FindGameObjectWithTag("WayPointHolder").GetComponent<WaypointHolder>();
+
+        waypoints = waypointHolder.GetWayPoints();
+        if (waypoints.Count == 0)
         {
             Debug.LogError("Geen waypoints ingesteld voor " + gameObject.name);
             return;
@@ -32,13 +39,15 @@ public class EnemyMover : MonoBehaviour
             sr.color = Color.red; // rode kleur als placeholder
         }
 
+      
+
         // Stel health in
         currentHealth = maxHealth;
     }
 
     void Update()
     {
-        if (currentIndex >= waypoints.Length) return;
+        if (currentIndex >= waypoints.Count) return;
 
         // Huidig doel
         Transform target = waypoints[currentIndex];
@@ -56,7 +65,7 @@ public class EnemyMover : MonoBehaviour
             currentIndex++;
 
             // Enemy is klaar met route
-            if (currentIndex >= waypoints.Length)
+            if (currentIndex >= waypoints.Count)
             {
                 Debug.Log(gameObject.name + " heeft het einde bereikt!");
                 Destroy(gameObject); // Of doe hier iets anders, bv. damage aan speler
