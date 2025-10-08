@@ -35,8 +35,9 @@ Je schets bevat minimaal:
 ## 4. Torens
 Toren 1 naam = tripolio, bereik = medium, schade = medium, unieke eigenschap = schiet 3 kogels per keer.
 
-Toren 2 naam = staralia, bereik = close schade = mediun, unieke eigenschap = gooit 2 sterretjes omstebuurt die ook weer terug komen.
+Toren 2 naam = staralia, bereik = close, schade = hoog, unieke eigenschap = gooit 2 sterretjes omstebuurt die ook weer terug komen.
 
+Toren 3 naam = Zaperino, bereik = medium, schade = medium unieke eigenschap = stunt enemys voor 1 seconden 
 Eventuele extra torens:
 
 ## 5. Vijanden
