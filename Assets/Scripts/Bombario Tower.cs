@@ -1,96 +1,89 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class BombarioTower : MonoBehaviour
 {
-    [Header("Tower Stats")]
+    [Header("Tower instellingen")]
     public float range = 5f;
-    public float shootCooldown = 1f;
-    public int damage = 1;
+    public float fireRate = 1f;
+    private float fireCountdown = 0f;
 
-    [Header("Enemy Targeting")]
-    public string enemyTag = "Enemy";
+    [Header("References")]
+    public string enemyTag = "Enemy";   // Zorg dat je enemy prefab deze tag heeft
+    public Transform firePoint;         // Empty object → FirePoint
+    public GameObject bulletPrefab;     // Bullet prefab met Bullet.cs erop
 
-    [Header("Shooting")]
-    public Transform firePoint;
-    public GameObject bulletPrefab;
+    private Transform target;
 
-    private EnemyMover currentTarget;
-    public EnemyMover CurrentTarget => currentTarget; // read-only getter
-    private float shootTimer = 0f;
+    // Property zodat andere scripts target kunnen lezen
+    public Transform CurrentTarget
+    {
+        get { return target; }
+    }
 
     void Update()
     {
-        if (currentTarget == null)
+        UpdateTarget();
+
+        if (target == null)
+            return;
+
+        // Draai de hele tower naar de enemy
+        Vector2 dir = target.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // 🔹 offset instellen als je sprite verkeerd staat
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+
+        if (fireCountdown <= 0f)
         {
-            FindTarget();
+            Shoot();
+            fireCountdown = 1f / fireRate;
+        }
+
+        fireCountdown -= Time.deltaTime;
+    }
+
+    void UpdateTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null && shortestDistance <= range)
+        {
+            target = nearestEnemy.transform;
         }
         else
         {
-            if (currentTarget == null) return;
-
-            float distance = Vector2.Distance(transform.position, currentTarget.transform.position);
-            if (distance > range)
-            {
-                currentTarget = null;
-                return;
-            }
-
-            // Tower draait altijd naar enemy
-            Vector2 dir = currentTarget.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            // Schiet cooldown
-            shootTimer -= Time.deltaTime;
-            if (shootTimer <= 0f)
-            {
-                Shoot();
-                shootTimer = shootCooldown;
-            }
-        }
-    }
-
-    void FindTarget()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        float closestDistance = Mathf.Infinity;
-        EnemyMover closestEnemy = null;
-
-        foreach (GameObject enemyObj in enemies)
-        {
-            float dist = Vector2.Distance(transform.position, enemyObj.transform.position);
-            if (dist <= range && dist < closestDistance)
-            {
-                closestDistance = dist;
-                closestEnemy = enemyObj.GetComponent<EnemyMover>();
-            }
-        }
-
-        if (closestEnemy != null)
-        {
-            currentTarget = closestEnemy;
+            target = null;
         }
     }
 
     void Shoot()
     {
-        if (bulletPrefab != null && firePoint != null)
-        {
-            // Spawn bullet in firePoint-richting
-            GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        BombarioBullet bullet = bulletGO.GetComponent<BombarioBullet>();
 
-            // damage doorgeven
-            Bullet bullet = bulletGO.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                bullet.damage = damage;
-            }
+        if (bullet != null && target != null)
+        {
+            bullet.SetTarget(target);
         }
     }
 
+    // Tekent de range in de Editor
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }

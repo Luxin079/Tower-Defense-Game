@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyMover : MonoBehaviour
 {
-    [Header("Waypoints in de juiste volgorde")]
-    public List<Transform> waypoints = new List<Transform>();
-
     [Header("Snelheid van de enemy")]
     public float moveSpeed = 2f;
 
@@ -13,19 +10,24 @@ public class EnemyMover : MonoBehaviour
     public int maxHealth = 5;   // instelbaar in de Inspector
     private int currentHealth;
 
+    private List<Transform> waypoints = new List<Transform>();
     private int currentIndex = 0;
-
-    private WaypointHolder waypointHolder;  
 
     void Start()
     {
-
-        waypointHolder = GameObject.FindGameObjectWithTag("WayPointHolder").GetComponent<WaypointHolder>();
-
-        waypoints = waypointHolder.GetWayPoints();
-        if (waypoints.Count == 0)
+        // 🔹 Probeer automatisch het WaypointHolder object te vinden
+        WaypointHolder holder = FindObjectOfType<WaypointHolder>();
+        if (holder == null)
         {
-            Debug.LogError("Geen waypoints ingesteld voor " + gameObject.name);
+            Debug.LogError("Geen WaypointHolder gevonden in de scene!");
+            return;
+        }
+
+        // 🔹 Haal de waypoints op uit de holder
+        waypoints = holder.GetWayPoints();
+        if (waypoints == null || waypoints.Count == 0)
+        {
+            Debug.LogError("Geen waypoints gevonden in WaypointHolder!");
             return;
         }
 
@@ -36,10 +38,8 @@ public class EnemyMover : MonoBehaviour
         if (GetComponent<SpriteRenderer>() == null)
         {
             SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
-            sr.color = Color.red; // rode kleur als placeholder
+            sr.color = Color.red; // placeholder kleur
         }
-
-      
 
         // Stel health in
         currentHealth = maxHealth;
@@ -47,7 +47,8 @@ public class EnemyMover : MonoBehaviour
 
     void Update()
     {
-        if (currentIndex >= waypoints.Count) return;
+        if (waypoints == null || waypoints.Count == 0 || currentIndex >= waypoints.Count)
+            return;
 
         // Huidig doel
         Transform target = waypoints[currentIndex];
@@ -68,12 +69,12 @@ public class EnemyMover : MonoBehaviour
             if (currentIndex >= waypoints.Count)
             {
                 Debug.Log(gameObject.name + " heeft het einde bereikt!");
-                Destroy(gameObject); // Of doe hier iets anders, bv. damage aan speler
+                Destroy(gameObject);
             }
         }
     }
 
-    // Deze functie kan door een tower worden aangeroepen
+    // Damage-functie
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;

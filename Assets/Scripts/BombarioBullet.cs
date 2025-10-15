@@ -1,27 +1,37 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BombarioBullet : MonoBehaviour
 {
-    [Header("Bullet Settings")]
     public float speed = 10f;
-    public float lifeTime = 3f;
     public int damage = 1;
 
-    void Start()
+    private Transform target;
+
+    public void SetTarget(Transform newTarget)
     {
-        // bullet verdwijnt sowieso na X seconden
-        Destroy(gameObject, lifeTime);
+        target = newTarget;
     }
 
     void Update()
     {
-        // beweeg altijd rechtdoor in de local "right" richting van het firePoint
-        transform.position += transform.right * speed * Time.deltaTime;
+        if (target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Vector2 direction = (target.position - transform.position).normalized;
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+
+        // Kijkt richting de enemy
+        Vector2 dir = target.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("enemy"))
+        if (collision.transform == target)
         {
             EnemyMover enemy = collision.GetComponent<EnemyMover>();
             if (enemy != null)
@@ -29,7 +39,7 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
 
-            Destroy(gameObject); // bullet weg na hit
+            Destroy(gameObject);
         }
     }
 }

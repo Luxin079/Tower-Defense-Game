@@ -7,15 +7,16 @@ TagManager:
   - enemy
   - tower
   - WayPointHolder
+  - road
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Road
   - Water
   - UI
-  - 
-  - 
+  - tower
+  - ground
   - 
   - 
   - 

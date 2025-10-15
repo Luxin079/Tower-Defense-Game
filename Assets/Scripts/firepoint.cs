@@ -1,18 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FirePointAim : MonoBehaviour
 {
     [Header("Reference")]
-    public Tower tower; // Verwijzing naar je Tower script
+    public BombarioTower tower;
 
     void Update()
     {
         if (tower.CurrentTarget != null)
         {
-            Vector2 dir = tower.CurrentTarget.transform.position - transform.position;
+            Vector2 dir = tower.CurrentTarget.position - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle + 90f);
+
+            // 🔹 Hier pas je offset aan als sprite niet goed draait
+            transform.rotation = Quaternion.Euler(0, 180, angle);
         }
     }
-   }
-
+}

@@ -113,7 +113,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   moveSpeed: 5
-  maxHealth: 3
+  maxHealth: 2
 --- !u!61 &669702374449882278
 BoxCollider2D:
   m_ObjectHideFlags: 0

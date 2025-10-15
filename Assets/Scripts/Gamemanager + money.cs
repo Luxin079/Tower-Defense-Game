@@ -45,6 +45,6 @@ public class GameManager : MonoBehaviour
     void UpdateUI()
     {
         if (moneyText != null)
-            moneyText.text = "Geld: " + money;
+            moneyText.text = "coins: " + money;
     }
 }
