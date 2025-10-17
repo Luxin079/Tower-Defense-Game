@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -29,9 +30,13 @@ public class WaveSpawner : MonoBehaviour
     private float waveCountdown;
     private bool isSpawning = false;
 
+    [SerializeField] private MoneyManager moneyManager;
+    [SerializeField] private TextMeshProUGUI wavesTxt;
+
     void Start()
     {
         waveCountdown = timeBetweenWaves;
+        wavesTxt.text = "Wave: " +  currentWaveIndex.ToString(); 
     }
 
     void Update()
@@ -61,6 +66,9 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWave(Wave wave)
     {
         Debug.Log("Start wave: " + wave.waveName);
+        moneyManager.AddMoney(100);
+        wavesTxt.text = "Wave: " + currentWaveIndex.ToString();
+
         isSpawning = true;
 
         // Voor elke groep enemies in de wave
