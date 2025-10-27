@@ -22,18 +22,23 @@ public class BombarioTower : MonoBehaviour
 
     void Update()
     {
-        UpdateTarget();
+        // Als er geen target is of de huidige target buiten range is, zoek een nieuwe
+        if (target == null || Vector2.Distance(transform.position, target.position) > range)
+        {
+            target = null;
+            UpdateTarget();
+        }
 
+        // Als er nog steeds geen target is, doe niks
         if (target == null)
             return;
 
-        // Draai de hele tower naar de enemy
+        // Draai naar de enemy
         Vector2 dir = target.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        // 🔹 offset instellen als je sprite verkeerd staat
         transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
+        // Schiet met interval
         if (fireCountdown <= 0f)
         {
             Shoot();
@@ -42,6 +47,7 @@ public class BombarioTower : MonoBehaviour
 
         fireCountdown -= Time.deltaTime;
     }
+
 
     void UpdateTarget()
     {

@@ -5,6 +5,7 @@ public class ZaperinoBullet : MonoBehaviour
     public float speed = 12f;
     public float slowAmount = 0.5f;   // 50% langzamer
     public float slowDuration = 2f;   // 2 seconden traag
+    public int damage = 1;
 
     private Transform target;
 
@@ -30,7 +31,9 @@ public class ZaperinoBullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform == target)
         {
@@ -39,6 +42,8 @@ public class ZaperinoBullet : MonoBehaviour
             {
                 // Hier gaan we de vijand vertragen
                 enemy.ApplySlow(slowAmount, slowDuration);
+                enemy.TakeDamage(damage);
+
             }
 
             Destroy(gameObject);
