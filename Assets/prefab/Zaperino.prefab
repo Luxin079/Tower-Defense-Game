@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6438394349079413188}
   - component: {fileID: 4726219365566505319}
   - component: {fileID: 8704099817950088855}
-  - component: {fileID: 8984265120916730285}
-  m_Layer: 3
+  - component: {fileID: 1447103898843498304}
+  m_Layer: 6
   m_Name: Zaperino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.94, y: 3.33, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8984265120916730285
+--- !u!114 &1447103898843498304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,14 +120,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6119868523015348130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c8a4c2ef5ef2b145afb4892bec5fd0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a79eeeb91db0c344b9868af67d63613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  fireRate: 1.5
-  enemyTag: Enemy
-  firePoint: {fileID: 0}
-  zaperinoBulletPrefab: {fileID: 0}
+  fireRate: 0.5
+  enemyTag: enemy
+  firePoint: {fileID: 6307894574615664372}
+  bulletPrefab: {fileID: 7213496875680080539, guid: cb2df94df00c5c3478e5180a7b626bd6, type: 3}
 --- !u!1 &9053274252442081378
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6307894574615664372
 Transform:
@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 9053274252442081378}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: ee195eb55ddb0f54198d8dd8a5edff84, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

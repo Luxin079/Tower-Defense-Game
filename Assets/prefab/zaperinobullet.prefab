@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7865618044538058548}
   - component: {fileID: 142460014945422378}
   - component: {fileID: 6218482778574818953}
+  - component: {fileID: 3561989628274721296}
   m_Layer: 0
   m_Name: zaperinobullet
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.199538, y: 1.1773992, z: -2.02}
-  m_LocalScale: {x: 0.1, y: 0.11, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -152,3 +153,18 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.6
+--- !u!114 &3561989628274721296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213496875680080539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edee6c58042f09e47bc4fbe560326b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  slowAmount: 0
+  slowDuration: 3

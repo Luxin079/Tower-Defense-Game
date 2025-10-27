@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class EnemyMover : MonoBehaviour
@@ -7,15 +8,18 @@ public class EnemyMover : MonoBehaviour
     public float moveSpeed = 2f;
 
     [Header("Enemy stats")]
-    public int maxHealth = 5;   // instelbaar in de Inspector
+    public int maxHealth = 5;
     private int currentHealth;
 
     private List<Transform> waypoints = new List<Transform>();
     private int currentIndex = 0;
 
+    // 🔹 Voor slow-effect
+    private float currentSpeed;
+    private Coroutine slowRoutine;
+
     void Start()
     {
-        // 🔹 Probeer automatisch het WaypointHolder object te vinden
         WaypointHolder holder = FindObjectOfType<WaypointHolder>();
         if (holder == null)
         {
@@ -23,7 +27,6 @@ public class EnemyMover : MonoBehaviour
             return;
         }
 
-        // 🔹 Haal de waypoints op uit de holder
         waypoints = holder.GetWayPoints();
         if (waypoints == null || waypoints.Count == 0)
         {
@@ -31,18 +34,16 @@ public class EnemyMover : MonoBehaviour
             return;
         }
 
-        // Startpositie = eerste waypoint
         transform.position = waypoints[0].position;
 
-        // Zorg dat enemy zichtbaar is
         if (GetComponent<SpriteRenderer>() == null)
         {
             SpriteRenderer sr = gameObject.AddComponent<SpriteRenderer>();
-            sr.color = Color.red; // placeholder kleur
+            sr.color = Color.red;
         }
 
-        // Stel health in
         currentHealth = maxHealth;
+        currentSpeed = moveSpeed; // begin op normale snelheid
     }
 
     void Update()
@@ -50,22 +51,18 @@ public class EnemyMover : MonoBehaviour
         if (waypoints == null || waypoints.Count == 0 || currentIndex >= waypoints.Count)
             return;
 
-        // Huidig doel
         Transform target = waypoints[currentIndex];
 
-        // Beweeg richting het waypoint
+        // Gebruik currentSpeed i.p.v. moveSpeed zodat slow werkt
         transform.position = Vector2.MoveTowards(
             transform.position,
             target.position,
-            moveSpeed * Time.deltaTime
+            currentSpeed * Time.deltaTime
         );
 
-        // Check of enemy dichtbij genoeg is
         if (Vector2.Distance(transform.position, target.position) < 0.05f)
         {
             currentIndex++;
-
-            // Enemy is klaar met route
             if (currentIndex >= waypoints.Count)
             {
                 Debug.Log(gameObject.name + " heeft het einde bereikt!");
@@ -74,7 +71,6 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    // Damage-functie
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -90,5 +86,23 @@ public class EnemyMover : MonoBehaviour
     {
         Debug.Log(gameObject.name + " is vernietigd!");
         Destroy(gameObject);
+    }
+
+    // 🔹 Slow-functie (werkt met ZaperinoBullet)
+    public void ApplySlow(float slowFactor, float duration)
+    {
+        // Stop vorige slow als er al een actief is
+        if (slowRoutine != null)
+            StopCoroutine(slowRoutine);
+
+        slowRoutine = StartCoroutine(SlowEffect(slowFactor, duration));
+    }
+
+    private IEnumerator SlowEffect(float slowFactor, float duration)
+    {
+        currentSpeed = moveSpeed * slowFactor;
+        yield return new WaitForSeconds(duration);
+        currentSpeed = moveSpeed;
+        slowRoutine = null;
     }
 }
