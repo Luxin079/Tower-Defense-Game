@@ -101,17 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c55034a138fa354f9295e1b3b8fe6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   moveSpeed: 1
   maxHealth: 3
 --- !u!61 &234185023707592477
@@ -158,5 +147,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.5, y: 3.5}
+  m_Size: {x: 3.5, y: 3.25}
   m_EdgeRadius: 0

@@ -1,29 +1,55 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class MoneyManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static MoneyManager Instance;
+
+    [Header("UI")]
     [SerializeField] private TextMeshProUGUI moneyTxt;
 
-    private int money = 100;
-    void Start()
+    [Header("Speler geld instellingen")]
+    [SerializeField] private int startingMoney = 100;
+    private int money;
+
+    private void Awake()
     {
-        UpdateUI(); 
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        money = startingMoney;
+        UpdateUI();
     }
-    public void AddMoney(int a)
+
+    public bool CanSpend(int amount)
     {
-        money += a;
-        UpdateUI(); 
+        return money >= amount;
     }
+
+    public void SpendMoney(int amount)
+    {
+        if (money >= amount)
+        {
+            money -= amount;
+            UpdateUI();
+        }
+        else
+        {
+            Debug.Log("❌ Niet genoeg geld!");
+        }
+    }
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
-        moneyTxt.text = "$: " + money.ToString();   
+        if (moneyTxt != null)
+            moneyTxt.text = "$: " + money.ToString();
     }
 }
