@@ -8,6 +8,7 @@ TagManager:
   - tower
   - WayPointHolder
   - road
+  - BuildArea
   layers:
   - Default
   - TransparentFX

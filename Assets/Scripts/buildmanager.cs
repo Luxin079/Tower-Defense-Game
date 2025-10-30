@@ -16,7 +16,7 @@ public class BuildManager : MonoBehaviour
 
     [Header("Tower Placement")]
     public float towerHeightOffset = 0.0f;
-    public string allowedTag = "BuildArea"; // Alleen hier mag gebouwd worden
+    public string allowedTag = "BuildArea"; // alleen hier mag gebouwd worden
 
     private void Awake()
     {
@@ -61,7 +61,12 @@ public class BuildManager : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Vector3 placePos = new Vector3(Mathf.Round(hit.point.x), hit.point.y + towerHeightOffset, Mathf.Round(hit.point.z));
+            Vector3 placePos = new Vector3(
+                Mathf.Round(hit.point.x),
+                hit.point.y + towerHeightOffset,
+                Mathf.Round(hit.point.z)
+            );
+
             previewTower.transform.position = placePos;
 
             TowerStatus towerStatus = selectedTowerPrefab.GetComponent<TowerStatus>();
@@ -70,10 +75,8 @@ public class BuildManager : MonoBehaviour
             bool canAfford = MoneyManager.Instance.CanSpend(towerCost);
             bool canBuildHere = hit.collider.CompareTag(allowedTag);
 
-            // 🔴 Rood als het niet kan, 🟢 wit als het mag
             UpdatePreviewColor(canAfford && canBuildHere);
 
-            // Klik = plaatsen
             if (Input.GetMouseButtonDown(0))
             {
                 if (canBuildHere)
@@ -106,7 +109,6 @@ public class BuildManager : MonoBehaviour
             Debug.Log("❌ Niet genoeg geld om deze tower te plaatsen!");
         }
 
-        // Clear preview
         if (previewTower != null)
             Destroy(previewTower);
 

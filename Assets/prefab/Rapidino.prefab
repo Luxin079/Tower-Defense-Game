@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6489693239009893159}
   - component: {fileID: 8430921351819565429}
   m_Layer: 3
-  m_Name: Bombario
+  m_Name: Rapidino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6206781134292006059}
@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 183606737381512328, guid: bf2a9de4483c2ec4a858c3e318297d32, type: 3}
+  m_Sprite: {fileID: -1909466139001168271, guid: 7dbebc68db7055541b2b8c863f2af6a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.94, y: 3.33}
+  m_Size: {x: 2.29, y: 3.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,10 +104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 3
-  fireRate: 0.75
+  fireRate: 3
   enemyTag: enemy
   firePoint: {fileID: 6206781134292006059}
-  bulletPrefab: {fileID: 5191751712321088422, guid: 65e22eef1d7d43342b146bea7855d307, type: 3}
+  bulletPrefab: {fileID: 5191751712321088422, guid: b3a261024b227b14198854d25c45593a, type: 3}
 --- !u!65 &6489693239009893159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e562e26e18dc86a46b4ddb487d917445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 75
+  towerCost: 300
 --- !u!1 &8331632611699816956
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 8331632611699816956}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.39, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

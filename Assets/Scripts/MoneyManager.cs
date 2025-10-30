@@ -50,6 +50,6 @@ public class MoneyManager : MonoBehaviour
     private void UpdateUI()
     {
         if (moneyTxt != null)
-            moneyTxt.text = "$: " + money.ToString();
+            moneyTxt.text = $"${money}";
     }
 }
