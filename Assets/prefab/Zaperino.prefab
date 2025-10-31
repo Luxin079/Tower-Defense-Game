@@ -110,7 +110,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.94, y: 3.33, z: 0.2}
+  m_Size: {x: 3, y: 3.5, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1447103898843498304
 MonoBehaviour:
@@ -124,9 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a79eeeb91db0c344b9868af67d63613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 100
   range: 5
-  fireRate: 0.5
+  fireRate: 0.75
   enemyTag: enemy
   firePoint: {fileID: 6307894574615664372}
   bulletPrefab: {fileID: 7213496875680080539, guid: cb2df94df00c5c3478e5180a7b626bd6, type: 3}

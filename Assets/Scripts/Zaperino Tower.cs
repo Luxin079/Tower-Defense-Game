@@ -3,7 +3,6 @@ using UnityEngine;
 public class ZaperinoTower : MonoBehaviour
 {
     [Header("Tower instellingen")]
-    public int cost = 100;
     public float range = 6f;
     public float fireRate = 1.5f;
     private float fireCountdown = 0f;

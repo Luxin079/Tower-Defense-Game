@@ -32,19 +32,22 @@ public class WaveSpawner : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI waveText;
-    [SerializeField] private int totalWaveCount = 20; // 🔹 Aantal waves voor UI weergave
+    [SerializeField] private int totalWaveCount = 20;
 
     private int baseReward = 100;
     private float rewardMultiplier = 1f;
 
-    void Start()
+    private void Start()
     {
         waveCountdown = timeBetweenWaves;
         UpdateWaveText();
     }
 
-    void Update()
+    private void Update()
     {
+        if (GameHealthManager.Instance != null && GameHealthManager.Instance.IsGameOver)
+            return; // stop alles bij Game Over
+
         if (!isSpawning)
         {
             if (waveCountdown <= 0f)
@@ -52,8 +55,8 @@ public class WaveSpawner : MonoBehaviour
                 if (currentWaveIndex < waves.Length)
                 {
                     StartCoroutine(SpawnWave(waves[currentWaveIndex]));
-                    currentWaveIndex++;
                     GiveWaveReward();
+                    currentWaveIndex++; // verhoog na reward
                     UpdateWaveText();
                 }
                 else
@@ -70,7 +73,7 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnWave(Wave wave)
+    private IEnumerator SpawnWave(Wave wave)
     {
         Debug.Log("Start wave: " + wave.waveName);
         isSpawning = true;
@@ -79,6 +82,12 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < group.count; i++)
             {
+                if (GameHealthManager.Instance != null && GameHealthManager.Instance.IsGameOver)
+                {
+                    isSpawning = false;
+                    yield break; // stop spawning bij Game Over
+                }
+
                 SpawnEnemy(group.enemyPrefab);
                 yield return new WaitForSeconds(1f / group.spawnRate);
             }
@@ -87,7 +96,7 @@ public class WaveSpawner : MonoBehaviour
         isSpawning = false;
     }
 
-    void SpawnEnemy(GameObject enemyPrefab)
+    private void SpawnEnemy(GameObject enemyPrefab)
     {
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
@@ -98,7 +107,6 @@ public class WaveSpawner : MonoBehaviour
         MoneyManager.Instance.AddMoney(reward);
         Debug.Log($"💰 Wave reward: {reward}");
 
-        // Elke 3 waves → +15% meer geld
         if (currentWaveIndex % 3 == 0)
         {
             rewardMultiplier += 0.15f;
@@ -110,8 +118,8 @@ public class WaveSpawner : MonoBehaviour
     {
         if (waveText != null)
         {
-            int displayWave = Mathf.Clamp(currentWaveIndex + 1, 1, totalWaveCount);
-            waveText.text = $"Wave: {displayWave}/{totalWaveCount}";
+            int displayWave = Mathf.Clamp(currentWaveIndex, 0, totalWaveCount - 1);
+            waveText.text = $"Wave: {displayWave}/{totalWaveCount - 1}";
         }
     }
 }
