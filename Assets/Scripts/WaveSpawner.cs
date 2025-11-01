@@ -45,8 +45,9 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (GameHealthManager.Instance != null && GameHealthManager.Instance.IsGameOver)
-            return; // stop alles bij Game Over
+        // ✅ Stop als GameHealthManager bestaat en levens op zijn
+        if (GameHealthManager.Instance != null && GameHealthManager.Instance.GetLives() <= 0)
+            return;
 
         if (!isSpawning)
         {
@@ -56,7 +57,7 @@ public class WaveSpawner : MonoBehaviour
                 {
                     StartCoroutine(SpawnWave(waves[currentWaveIndex]));
                     GiveWaveReward();
-                    currentWaveIndex++; // verhoog na reward
+                    currentWaveIndex++;
                     UpdateWaveText();
                 }
                 else
@@ -82,10 +83,11 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < group.count; i++)
             {
-                if (GameHealthManager.Instance != null && GameHealthManager.Instance.IsGameOver)
+                // ✅ Stop met spawnen als speler geen levens meer heeft
+                if (GameHealthManager.Instance != null && GameHealthManager.Instance.GetLives() <= 0)
                 {
                     isSpawning = false;
-                    yield break; // stop spawning bij Game Over
+                    yield break;
                 }
 
                 SpawnEnemy(group.enemyPrefab);

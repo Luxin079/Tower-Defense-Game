@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class GameHealthManager : MonoBehaviour
 {
     public static GameHealthManager Instance;
 
-    [Header("Health Settings")]
-    public int maxLives = 10;
+    [Header("Instellingen")]
+    [SerializeField] private int maxLives = 10;
     private int currentLives;
+    private bool isGameOver = false;
 
     [Header("UI")]
-    public TextMeshProUGUI livesText;
-    public GameObject gameOverPanel;
-
-    [HideInInspector]
-    public bool IsGameOver { get; private set; } = false;
+    [SerializeField] private TextMeshProUGUI livesText; // Sleep hier je TMP-text object in
+    [SerializeField] private GameObject gameOverPanel;   // optioneel (kan leeg blijven)
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     private void Start()
@@ -32,45 +31,37 @@ public class GameHealthManager : MonoBehaviour
             gameOverPanel.SetActive(false);
     }
 
-    public void EnemyReachedCheckpoint()
+    private void UpdateLivesUI()
     {
-        if (IsGameOver) return;
+        if (livesText != null)
+            livesText.text = $"Lives: {currentLives}";
+        else
+            Debug.LogWarning("⚠️ LivesText niet ingesteld in GameHealthManager!");
+    }
+
+    public void LoseLife()
+    {
+        if (isGameOver)
+            return;
 
         currentLives--;
         UpdateLivesUI();
 
         if (currentLives <= 0)
-        {
             GameOver();
-        }
-    }
-
-    private void UpdateLivesUI()
-    {
-        if (livesText != null)
-            livesText.text = $"Lives: {currentLives}/{maxLives}";
     }
 
     private void GameOver()
     {
-        IsGameOver = true;
+        isGameOver = true;
+        Debug.Log("💀 GAME OVER!");
 
-        Debug.Log("💀 Game Over!");
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
-        // Destroy alle actieve enemies
-        foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            Destroy(enemy);
-        }
-
-        // Reset na 3 seconden
-        Invoke(nameof(RestartGame), 3f);
+        Time.timeScale = 0f;
     }
 
-    private void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    public bool IsGameOver => isGameOver;
+    public int GetLives() => currentLives;
 }

@@ -9,7 +9,7 @@ public class EnemyMover : MonoBehaviour
 
     [Header("Enemy stats")]
     public int maxHealth = 5;
-    private int currentHealth;
+    private int currentHealth;  
 
     private List<Transform> waypoints = new List<Transform>();
     private int currentIndex = 0;
@@ -62,13 +62,13 @@ public class EnemyMover : MonoBehaviour
         {
             currentIndex++;
             if (currentIndex >= waypoints.Count)
-            {
-                Debug.Log(gameObject.name + " heeft het einde bereikt!");
-                if (GameHealthManager.Instance != null)
-                    GameHealthManager.Instance.EnemyReachedCheckpoint();
-
-                Destroy(gameObject);
-            }
+                if (currentIndex >= waypoints.Count)
+                {
+                    Debug.Log(gameObject.name + " heeft het einde bereikt!");
+                    if (GameHealthManager.Instance != null)
+                        GameHealthManager.Instance.LoseLife();
+                    Destroy(gameObject);
+                }
         }
     }
 
