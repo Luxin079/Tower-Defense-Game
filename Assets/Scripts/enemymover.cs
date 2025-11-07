@@ -9,7 +9,7 @@ public class EnemyMover : MonoBehaviour
 
     [Header("Enemy stats")]
     public int maxHealth = 5;
-    private int currentHealth;  
+    private int currentHealth;
 
     private List<Transform> waypoints = new List<Transform>();
     private int currentIndex = 0;
@@ -62,23 +62,28 @@ public class EnemyMover : MonoBehaviour
         {
             currentIndex++;
             if (currentIndex >= waypoints.Count)
-                if (currentIndex >= waypoints.Count)
-                {
-                    Debug.Log(gameObject.name + " heeft het einde bereikt!");
-                    if (GameHealthManager.Instance != null)
-                        GameHealthManager.Instance.LoseLife();
-                    Destroy(gameObject);
-                }
+            {
+                Debug.Log(gameObject.name + " heeft het einde bereikt!");
+                if (GameHealthManager.Instance != null)
+                    GameHealthManager.Instance.LoseLife();
+                Destroy(gameObject);
+            }
         }
     }
 
-    public void TakeDamage(int damage)
+    // ✅ Returnt true als de enemy is doodgegaan
+    public bool TakeDamage(int damage)
     {
         currentHealth -= damage;
         Debug.Log(gameObject.name + " kreeg " + damage + " damage. Health: " + currentHealth);
 
         if (currentHealth <= 0)
+        {
             Die();
+            return true; // enemy dood
+        }
+
+        return false; // leeft nog
     }
 
     private void Die()
