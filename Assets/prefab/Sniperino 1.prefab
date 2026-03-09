@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d0ddb9458f8284686a234187884e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 8
-  fireRate: 0.3
+  range: 10
+  fireRate: 0.375
   enemyTag: enemy
   firePoint: {fileID: 9108332951309146050}
   bulletPrefab: {fileID: 5191751712321088422, guid: 795a5b7d4cf442f48a3caf91e45355d7, type: 3}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e562e26e18dc86a46b4ddb487d917445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerCost: 400
+  towerCost: 350
 --- !u!1 &2684753992727925827
 GameObject:
   m_ObjectHideFlags: 0

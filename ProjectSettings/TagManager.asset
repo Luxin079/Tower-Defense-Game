@@ -9,6 +9,7 @@ TagManager:
   - WayPointHolder
   - road
   - BuildArea
+  - DamageZone
   layers:
   - Default
   - TransparentFX
